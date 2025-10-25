@@ -29,19 +29,23 @@ Seeds (Raw)	customers.csv, orders.csv, products.csv, order_items.csv	Base source
 Staging	stg_customers, stg_orders, stg_products, stg_order_items	Cleans & standardizes fields
 Marts (Facts & Dims)	fct_orders, fct_order_items, dim_customers, dim_products, dim_date	Business-ready analytics layer
 📊 Star Schema Design
+
+
+
                 ┌───────────────────────────┐
-                │        dim_customers       │
+                │        dim_customers      │
                 └──────────────┬────────────┘
                                │
                                │
 ┌───────────────┐       ┌──────┴────────┐        ┌─────────────────────┐
-│ dim_products  │◄──────┤   fct_orders  ├───────►│      dim_date        │
+│ dim_products  │◄──────┤   fct_orders  ├───────►│      dim_date       │
 └───────────────┘       └──────┬────────┘        └─────────────────────┘
                                │
                                ▼
-                       ┌──────────────┐
+                       ┌───────────────────┐
                        │ PowerBI Dashboard │
-                       └──────────────────┘
+                       └───────────────────┘
+
 
 🧪 Testing & Validation
 
@@ -63,6 +67,7 @@ Returning Customers := CALCULATE(
     DISTINCTCOUNT(dim_customers[customer_id]),
     FILTER(dim_customers, dim_customers[order_count] > 1)
 )
+
 
 📂 Project Structure
 ecom_dwh_dbt/
