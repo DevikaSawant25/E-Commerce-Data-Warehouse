@@ -1,0 +1,13 @@
+ecom_dwh:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: /path/to/your-service-account.json
+      project: your-gcp-project-id
+      dataset: ecom_dwh
+      location: US
+      priority: interactive
+      threads: 4
+      timeout_seconds: 300

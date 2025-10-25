@@ -1,0 +1,34 @@
+name: 'ecom_dwh'
+version: '1.0.0'
+config-version: 2
+
+profile: 'ecom_dwh'
+
+model-paths: ['models']
+seed-paths: ['seeds']
+macro-paths: ['macros']
+snapshot-paths: ['snapshots']
+test-paths: ['tests']
+analysis-paths: ['analyses']
+
+models:
+  ecom_dwh:
+    +materialized: view
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
+
+seeds:
+  ecom_dwh:
+    +schema: raw
+    +quote_columns: false
+    customers:
+      +column_types:
+        signup_date: date
+    orders:
+      +column_types:
+        order_date: date
+    calendar:
+      +column_types:
+        date_day: date

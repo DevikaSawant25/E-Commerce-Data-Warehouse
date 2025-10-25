@@ -1,0 +1,17 @@
+version: 2
+
+exposures:
+  - name: ecommerce_powerbi_dashboard
+    type: dashboard
+    maturity: high
+    url: https://powerbi.microsoft.com/ # replace with your real report URL
+    description: "Sales and customer analytics dashboard built on dim_* and fct_* models."
+    depends_on:
+      - ref('dim_customers')
+      - ref('dim_products')
+      - ref('dim_date')
+      - ref('fct_orders')
+      - ref('fct_order_items')
+    owner:
+      name: Data Team
+      email: data.team@example.com

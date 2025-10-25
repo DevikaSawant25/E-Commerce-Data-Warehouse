@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_customers
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [customer_id]
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null]
+  - name: stg_products
+    columns:
+      - name: product_id
+        tests: [not_null, unique]
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests: [not_null, unique]
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['placed','paid','shipped','delivered','cancelled']
+  - name: stg_order_items
+    columns:
+      - name: order_item_id
+        tests: [not_null, unique]
+      - name: order_id
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+  - name: stg_calendar
+    columns:
+      - name: date_day
+        tests: [not_null, unique]

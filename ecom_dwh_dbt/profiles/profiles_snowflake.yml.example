@@ -1,0 +1,14 @@
+ecom_dwh:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: your_account # e.g. abcd-xy123
+      user: your_user
+      password: your_password
+      role: SYSADMIN
+      database: ANALYTICS
+      warehouse: COMPUTE_WH
+      schema: ECOM_DWH
+      threads: 4
+      client_session_keep_alive: false
